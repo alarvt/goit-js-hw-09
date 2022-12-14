@@ -15,7 +15,7 @@ const colorChenger = {
             return;
         }
         this.isActive = true;
-        this.    = setInterval(() => {
+        this.setInterval(() => {
           bodyColor.style.backgroundColor = getRandomHexColor();
           console.log(bodyColor.style.backgroundColor);
         }, 1000);
