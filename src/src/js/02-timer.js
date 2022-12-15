@@ -1,8 +1,8 @@
-/* import flatpickr from 'flatpickr';
+import flatpickr from 'flatpickr';
 // Дополнительный импорт стилей
 import 'flatpickr/dist/flatpickr.min.css';
 
-<input type="text" id="datetime-picker" />;
+
 
 const options = {
   enableTime: true,
@@ -39,53 +39,14 @@ console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
 
-{
+/* {
     altInput: true,
     altFormat: "F j, Y",
     dateFormat: "Y-m-d",
 } */
 
 //-------------------------
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    onInputDate(selectedDates[0]);
-  },
-};
-const fp = flatpickr('#datetime-picker', options);
-refs.buttonStartEl.setAttribute('disabled', 'disabled');
-let timeId = null;
-const INTERVAL = 1000;
-/** functions */
-function onInputDate(selectedDates) {
-  if (selectedDates <= Date.now()) {
-    // alert('Please choose a date in the future');
-    Notiflix.Notify.failure('Please choose a date in the future');
-  } else {
-    refs.buttonStartEl.removeAttribute('disabled', 'disabled');
-    onStartedTimer(selectedDates);
-  }
-}
-function onStartedTimer(selectedDates) {
-  let timerValueInMs = Date.parse(selectedDates) - Date.now();
-  let objTimerValue = convertMs(timerValueInMs);
-  refs.buttonStartEl.addEventListener('click', () => {
-    refs.buttonStartEl.setAttribute('disabled', 'disabled');
-    refs.inputDateEl.setAttribute('disabled', 'disabled');
-    timeId = setInterval(() => {
-      if (timerValueInMs <= 0) {
-        clearInterval(timeId);
-        return;
-      }
-      objTimerValue = convertMs(timerValueInMs);
-      refs.daysEl.textContent = addLeadingZero(objTimerValue.days);
-      refs.hoursEl.textContent = addLeadingZero(objTimerValue.hours);
-      refs.minutesEl.textContent = addLeadingZero(objTimerValue.minutes);
-      refs.secondsEl.textContent = addLeadingZero(objTimerValue.seconds);
-      timerValueInMs -= INTERVAL;
-    }, INTERVAL);
-  });
-}
+
+
+const date = new Date();
+console.log(date)
