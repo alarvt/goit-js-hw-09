@@ -5,7 +5,7 @@ const refs = {
 };
 console.log(refs);
 
-refs.form.addEventListener('submit', onCreatePromises);
+refs.form.addEventListener('submit', onFormSubmit);
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
@@ -20,7 +20,7 @@ function createPromise(position, delay) {
   });
 }
  
-function onCreatePromises(e) {
+function onFormSubmit(e) {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
   const dataParams = {};
@@ -30,12 +30,13 @@ function onCreatePromises(e) {
   }
 
   let { amount, step, delay } = dataParams;
-  for (let i = 1; i <= amount; i += 1) {
-    delay += step;
-    createPromise(i, delay).then(onSuccess).catch(onError);
 
-    refs.form.reset();
+  for (let i = 1; i <= amount; i += 1) {
+    
+    createPromise(i, delay).then(onSuccess).catch(onError);
+    delay += step;
   }
+  refs.form.reset();
 }
 
 function onSuccess({ position, delay }) {
@@ -45,4 +46,7 @@ function onSuccess({ position, delay }) {
 function onError({ position, delay }) {
   Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
 }
+
+
+
 
